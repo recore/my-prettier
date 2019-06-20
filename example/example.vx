@@ -1,0 +1,16 @@
+<div x-for={data} x-each="x">{x.name}</div>
+<div className="home"><div className="stats"><div className="stat stat-users"><h3 className="stat-title"><span>总用户数量</span><Tooltip overlay="我是针对这个对象的说明" placement="bottom"><Icon name="yiwencopy" /></Tooltip></h3><p className="subtitle">293,768</p><div className="stat-main"><div className="info-row" style.marginTop={30}><div className="info-col"><label className="info-label">
+              日环比
+            </label><NumberInfo.Trend status="up">+10%</NumberInfo.Trend></div><div className="info-col"><label className="info-label">
+              周环比
+            </label><NumberInfo.Trend status="down">-20%</NumberInfo.Trend></div></div></div><div className="stat-foot"><div className="info-row"><div className="info-col"><label className="info-label">
+              日访问量
+            </label><NumberInfo.Trend>1234</NumberInfo.Trend></div><div className="info-col"><label className="info-label">
+              日用户数
+            </label><NumberInfo.Trend>1234</NumberInfo.Trend></div></div></div></div><div className="stat stat-total"><h3 className="stat-title"><span>总用电量</span><Tooltip overlay="我是针对这个对象的说明" placement="bottom"><Icon name="yiwencopy" /></Tooltip></h3><p className="subtitle">293,768</p><MonthCharge className="stat-main" /><div className="stat-foot"><div className="info-row"><div className="info-col"><label className="info-label">
+              日访问量
+            </label><NumberInfo.Trend>1234</NumberInfo.Trend></div></div></div></div><div className="stat stat-month-1"><h3 className="stat-title"><span>月用电量</span><Tooltip overlay="我是针对这个对象的说明" placement="bottom"><Icon name="yiwencopy" /></Tooltip></h3><p className="subtitle">195%</p><MonthCharge /><div className="stat-foot"><div className="info-row"><div className="info-col"><label className="info-label">
+              日访问量
+            </label><NumberInfo.Trend>1234</NumberInfo.Trend></div></div></div></div><div className="stat stat-month-2"><h3 className="stat-title"><span>月均用电量</span><Tooltip overlay="我是针对这个对象的说明" placement="bottom"><Icon name="yiwencopy" /></Tooltip></h3><p className="subtitle">195%</p><MonthCharge /><div className="stat-foot"><div className="info-row"><div className="info-col"><label className="info-label">
+              日环比
+            </label><NumberInfo.Trend status="up">+10%</NumberInfo.Trend></div></div></div></div></div><div className="charge-chart"><h2>用电量</h2><ChargeChart data={chargeData} /></div></div>

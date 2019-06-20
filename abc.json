@@ -1,0 +1,15 @@
+{
+    "assets":{
+        "type":"command",
+        "command":{
+            "cmd":[
+                "tnpm install",
+                "tnpm run build",
+                "mv ./LICENSE ./dist",
+                "mv ./README.md ./dist",
+                "mv ./package.json ./dist",
+                "mv ./dist $BUILD_DEST"
+            ]
+        }
+    }
+}
