@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.alibaba-inc.com:recore/vx-format.git"
+    "url": "git@gitlab.alibaba-inc.com:recore/my-prettier.git"
   },
   "author": "wuyue.xht",
   "license": "MIT",
