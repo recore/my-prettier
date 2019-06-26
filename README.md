@@ -1,11 +1,16 @@
-## vx-format
-Prettier Standalone for VisionX
+## MyPrettier
+Prettier Standalone for VisionX and Controller
 
 ### Usage
-```sh
-import format from '@ali/vx-format';
+```js
+import format from '@ali/my-prettier';
 import * as fs from 'fs';
 
-const text = fs.readFileSync('./example.vx', 'utf-8');
-const code = format(text);
+// vx
+const vx = fs.readFileSync('./example.vx', 'utf-8');
+const formatVX = format(text, 'vx');
+
+// controller
+const ctrl = fs.readFileSync('./example.ts', 'utf-8');
+const formatCtrl = format(ctrl, 'ctrl');
 ```
