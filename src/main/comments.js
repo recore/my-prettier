@@ -13,11 +13,13 @@ const {
 const {
   hasNewline,
   skipNewline,
-  isPreviousLineEmpty,
+  isPreviousLineEmpty
+} = require("../common/util");
+const {
   addLeadingComment,
   addDanglingComment,
   addTrailingComment
-} = require("../common/utils");
+} = require("../common/util-shared");
 const childNodesCacheKey = Symbol("child-nodes");
 
 function getSortedChildNodes(node, options, resultArray) {

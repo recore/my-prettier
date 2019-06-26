@@ -1,16 +1,10 @@
 "use strict";
 
 const stringWidth = require("string-width");
-const escapeStringRegexp = require("escape-string-regexp");
-const NON_LINE_TERMINATING_WHITE_SPACE = "(?:(?=.)\\s)";
-const FLOW_SHORTHAND_ANNOTATION = new RegExp(
-  `^${NON_LINE_TERMINATING_WHITE_SPACE}*:`
-);
+const getLast = require("../utils/get-last");
 
 // eslint-disable-next-line no-control-regex
 const notAsciiRegex = /[^\x20-\x7F]/;
-
-const FLOW_ANNOTATION = new RegExp(`^${NON_LINE_TERMINATING_WHITE_SPACE}*::`);
 
 function isExportDeclaration(node) {
   if (node) {
@@ -190,8 +184,7 @@ function isNextLineEmptyAfterIndex(text, index) {
   return hasNewline(text, idx);
 }
 
-function isNextLineEmpty(text, node, options) {
-  const locEnd = options.locEnd;
+function isNextLineEmpty(text, node, locEnd) {
   return isNextLineEmptyAfterIndex(text, locEnd(node));
 }
 
@@ -506,10 +499,7 @@ function printString(raw, options, isDirectiveLiteral) {
       options.parser === "css" ||
       options.parser === "less" ||
       options.parser === "scss" ||
-      options.parentParser === "html" ||
-      options.parentParser === "vue" ||
-      options.parentParser === "angular" ||
-      options.parentParser === "lwc"
+      options.embeddedInHtml
     )
   );
 }
@@ -566,21 +556,6 @@ function printNumber(rawNumber) {
       .replace(/(\.\d+?)0+(?=e|$)/, "$1")
       // Remove trailing dot.
       .replace(/\.(?=e|$)/, "")
-  );
-}
-
-function getMaxContinuousCount(str, target) {
-  const results = str.match(
-    new RegExp(`(${escapeStringRegexp(target)})+`, "g")
-  );
-
-  if (results === null) {
-    return 0;
-  }
-
-  return results.reduce(
-    (maxCount, result) => Math.max(maxCount, result.length / target.length),
-    0
   );
 }
 
@@ -683,39 +658,9 @@ function replaceEndOfLineWith(text, replacement) {
   return parts;
 }
 
-function getLast(arr) {
-  return arr.length > 0 ? arr[arr.length - 1] : null;
-}
-
-function hasFlowShorthandAnnotationComment(node) {
-  // https://flow.org/en/docs/types/comments/
-  // Syntax example: const r = new (window.Request /*: Class<Request> */)("");
-
-  return (
-    node.extra &&
-    node.extra.parenthesized &&
-    node.trailingComments &&
-    node.trailingComments[0].value.match(FLOW_SHORTHAND_ANNOTATION)
-  );
-}
-
-function hasFlowAnnotationComment(comments) {
-  return comments && comments[0].value.match(FLOW_ANNOTATION);
-}
-
-function arrayify(object, keyName) {
-  return Object.keys(object).reduce(
-    (array, key) =>
-      array.concat(Object.assign({ [keyName]: key }, object[key])),
-    []
-  );
-}
-
 module.exports = {
-  arrayify,
   replaceEndOfLineWith,
   getStringWidth,
-  getMaxContinuousCount,
   getPrecedence,
   shouldFlatten,
   isBitwiseOperator,
@@ -755,7 +700,5 @@ module.exports = {
   addLeadingComment,
   addDanglingComment,
   addTrailingComment,
-  isWithinParentArrayProperty,
-  hasFlowShorthandAnnotationComment,
-  hasFlowAnnotationComment
+  isWithinParentArrayProperty
 };

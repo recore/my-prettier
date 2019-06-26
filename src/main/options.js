@@ -89,10 +89,6 @@ function normalize(options, opts) {
     }
   });
 
-  if (rawOptions.parser === "json") {
-    rawOptions.trailingComma = "none";
-  }
-
   return normalizer.normalizeApiOptions(
     rawOptions,
     supportOptions,

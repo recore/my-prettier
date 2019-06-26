@@ -11,7 +11,7 @@ const {
   convertEndOfLineToChars
 } = require("../common/end-of-line");
 const rangeUtil = require("./range-util");
-const privateUtil = require("../common/utils");
+const privateUtil = require("../common/util");
 const {
   utils: { mapDoc },
   printer: { printDocToString }
@@ -208,7 +208,6 @@ function formatRange(text, opts) {
     Object.assign({}, opts, {
       rangeStart: 0,
       rangeEnd: Infinity,
-      printWidth: opts.printWidth - alignmentSize,
       // track the cursor offset only if it's within our range
       cursorOffset:
         opts.cursorOffset >= rangeStart && opts.cursorOffset < rangeEnd

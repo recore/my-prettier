@@ -1,7 +1,7 @@
 "use strict";
 
 const semver = require("semver");
-const { arrayify } = require("../common/utils");
+const arrayify = require("../utils/arrayify");
 const currentVersion = require("../../package.json").version;
 const coreOptions = require("./core-options").options;
 

@@ -2,7 +2,7 @@
 
 const path = require("path");
 const ConfigError = require("../common/errors").ConfigError;
-const jsLoc = require("../language-visionx/parser/loc");
+const jsLoc = require("../language-js/loc");
 
 const { locStart, locEnd } = jsLoc;
 

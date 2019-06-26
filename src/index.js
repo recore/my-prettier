@@ -2,7 +2,11 @@
 
 const core = require("./main/core");
 
-const internalPlugins = [require("./language-visionx")];
+const parser = require("@ali/vx-ast-parser");
+
+const plugins = [require('./language-js/parser-typescript')];
+
+const internalPlugins = [require("./language-js")];
 
 const isArray =
   Array.isArray ||
@@ -29,7 +33,7 @@ const formatWithCursor = withPlugins(core.formatWithCursor);
 
 const RE_SPACES = /^ */;
 const RE_COMMENT_BEFORE = /<!--(?:.*?)-->(?<!$)/;
-function format(text, opts = { parser: "visionx-parse" }) {
+function formatVisionX(text, opts) {
   let code = formatWithCursor(text, opts).formatted;
   const lines = code.split('\n').slice(2, -3);
   if (!lines[0]) {
@@ -57,6 +61,42 @@ function format(text, opts = { parser: "visionx-parse" }) {
     } while (m);
     return segments.join('') + line;
   }).join('\n') + '\n';
+}
+
+function parseVisionX(contents) {
+  const code = '<>'+(contents || '').trimRight()+'</>';
+
+  const plugins = [
+    'jsx',
+    'optionalChaining',
+    ['decorators', { decoratorsBeforeExport: true }],
+    'objectRestSpread',
+    ['pipelineOperator', { proposal: 'minimal' }],
+  ];
+
+  const out = parser.parse(code, {
+    jsxTopLevel: true,
+    plugins,
+  });
+
+  return out;
+}
+
+function format(text, type) {
+  let opts = {
+    singleQuote: true,
+    printWidth: 120,
+    trailingComma: "all"
+  }
+  if (type === 'vx') {
+    opts = Object.assign(opts, { parser(text) {
+      return parseVisionX(text);}
+    });
+    return formatVisionX(text, opts);
+  } else if (type === 'ctrl') {
+    opts = Object.assign(opts, { parser: "typescript", plugins });
+    return formatWithCursor(text, opts).formatted;
+  }
 }
 
 module.exports = format;

@@ -1,12 +1,23 @@
 "use strict";
 
-const format = require("../src/index");
+const format = require("../dist/my-prettier.min");
+// const format = require("../src/index");
 const fs = require("fs");
 const path = require("path");
 
-const url = path.join(__dirname, "example.vx");
+const urlVX = path.join(__dirname, "example.vx");
 
-const code = fs.readFileSync(url, "utf-8");
+const vx = fs.readFileSync(urlVX, "utf-8");
 
 // eslint-disable-next-line no-console
-console.log(format(code));
+console.log(format(vx, "vx"));
+
+const urlCtrl = path.join(__dirname, "page.ts");
+
+const ctrl = fs.readFileSync(urlCtrl, "utf-8");
+
+// eslint-disable-next-line no-console
+console.log(">>>>>>>>>");
+
+// eslint-disable-next-line no-console
+console.log(format(ctrl, "ctrl"));

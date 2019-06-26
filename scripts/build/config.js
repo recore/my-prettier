@@ -1,6 +1,7 @@
 "use strict";
 
 const path = require("path");
+const PROJECT_ROOT = path.resolve(__dirname, "../..");
 
 /**
  * @typedef {Object} Bundle
@@ -11,7 +12,7 @@ const path = require("path");
  * @property {'core' | 'plugin'} type - it's a plugin bundle or core part of prettier
  * @property {'rollup' | 'webpack'} [bundler='rollup'] - define which bundler to use
  * @property {CommonJSConfig} [commonjs={}] - options for `rollup-plugin-commonjs`
- * @property {string[]} external - array of paths that should not be included in the final bundle
+ * @property {string[]} externals - array of paths that should not be included in the final bundle
  * @property {Object.<string, string>} replace - map of strings to replace when processing the bundle
  * @property {string[]} babelPlugins - babel plugins
 
@@ -31,25 +32,18 @@ const parsers = [].map(parser => {
 /** @type {Bundle[]} */
 const coreBundles = [
   {
-    input: "src/doc/index.js",
-    name: "doc",
+    input: "src/index.js",
+    name: "MyPrettier",
     type: "core",
-    output: "dist/doc.js",
-    target: "universal"
+    target: "universal",
+    output: "my-prettier.js"
   },
   {
     input: "src/index.js",
-    name: "prettier",
-    type: "core",
-    output: "dist/index.js",
-    target: "universal"
-  },
-  {
-    input: "src/index.js",
-    name: "prettier",
+    name: "MyPrettier",
     type: "prod",
-    output: "dist/index.min.js",
-    target: "universal"
+    target: "universal",
+    output: "my-prettier.min.js"
   }
 ];
 

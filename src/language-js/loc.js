@@ -1,6 +1,6 @@
 "use strict";
 
-const getLast = require("../../common/utils");
+const getLast = require("../utils/get-last");
 
 function locStart(node, opts) {
   opts = opts || {};
