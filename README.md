@@ -3,7 +3,7 @@ Prettier Standalone for VisionX and Controller
 
 ### Usage
 ```js
-import format from '@ali/my-prettier';
+import format from 'my-prettier';
 import * as fs from 'fs';
 
 // vx

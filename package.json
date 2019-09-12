@@ -1,22 +1,19 @@
 {
-  "name": "@ali/my-prettier",
-  "version": "1.0.0",
+  "name": "my-prettier",
+  "version": "0.8.0",
   "description": "Prettier Standalone for VisionX and Controller",
-  "publishConfig": {
-    "registry": "http://registry.npm.alibaba-inc.com"
-  },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.alibaba-inc.com:recore/my-prettier.git"
+    "url": "git@github.com:recore/my-prettier.git"
   },
-  "author": "wuyue.xht",
+  "author": "albertxiao1994",
   "license": "MIT",
   "main": "dist/my-prettier.js",
   "engines": {
     "node": ">=6"
   },
   "dependencies": {
-    "@ali/vx-ast-parser": "^1.1.0",
+    "vx-ast-parser": "^0.8.0",
     "@babel/code-frame": "7.0.0",
     "chalk": "2.1.0",
     "dedent": "0.7.0",
